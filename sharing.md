@@ -1,6 +1,11 @@
 <!-- GFM-TOC -->
+
 * [一、概述](#一概述)
     * [1. 单一职责原则](#单一职责原则)
+    * [2. 开放封闭原则](#开放封闭原则)
+    * [3. 依赖倒转原则](#依赖倒转原则)
+    * [4. 里式替换原则](#里式替换原则)
+    * [5. 迪米特法则](#迪米特法则)
 * [二、创建型](#二创建型)
     * [1. 单例（Singleton）](#1-单例singleton)
     * [2. 简单工厂（Simple Factory）](#2-简单工厂simple-factory)
@@ -43,7 +48,7 @@
 
 ### 单一职责原则
 单一职责原则是说，就一个类而言，应该仅有一个引起它变化的原因。如果一个类承担的职责过多就等于把这些职责耦合在一起，一个职责的变化可能会小若或者抑制这个类完成其他职责的能力。这种耦合会导致脆弱的设计，当变化发送时，设计会遭受到意想不到的破坏。就游戏而言，游戏逻辑有下落，旋转，碰撞判断，移动，堆积种种。这些功能应该分离开来。
-### 开发封闭原则
+### 开放封闭原则
 开放-封闭原则是说，是说软件实体(类，模块，函数等等)应该可以扩展，但是不可修改。**这个原则其实有两个特征，一个是说，对于扩展是开放的，另一个是说对于更改是封闭的。**装饰器模式较明显地遵循了这个原则。
 
 
@@ -76,11 +81,10 @@
 
 ### 迪米特法则
 
-迪米特法则是说，一个对象应当对其他对象有尽可能少的了解，（体现在中介者模式）。这个法则强调的是类直接的松耦合。（举例 cpu 内存，网卡，显卡互相通信，）
+迪米特法则是说，一个对象应当对其他对象有尽可能少的了解，例如：中介者模式。这个法则强调的是类直接的松耦合。（举例 cpu 内存，网卡，显卡互相通信，）
 
-![1497962606458_7](/Users/che/Desktop/1497962606458_7.png)
-
-![1497962606076_5](/Users/che/Desktop/1497962606076_5.png)
+<img src="./images/example without Law of Demeter.png" style="zoom:100%">
+<img src="./images/example with Law of Demeter.png" style="zoom:90%">
 
 # 二、创建型
 
@@ -96,7 +100,7 @@
 
 私有构造函数保证了不能通过构造函数来创建对象实例，只能通过公有静态函数返回唯一的私有静态变量。
 
-<div align="center"> <img src="../pics//562f2844-d77c-40e0-887a-28a7128abd42.png"/> </div><br>
+<img src="./images/singleton.png" style="zoom:100%">
 
 ### Implementation
 
@@ -197,7 +201,7 @@ uniqueInstance 采用 volatile 关键字修饰也是很有必要的， `uniqueIn
 
 Example:SQLContext
 
-<img src="./images/example_sqlcontext.png" style="zoom:50%" />
+<img src="./images/singleton example.png" style="zoom:50%" />
 
 #### Ⅴ 静态内部类实现
 
@@ -301,7 +305,7 @@ secondName
 
 这样做能把客户类和具体子类的实现解耦，客户类不再需要知道有哪些子类以及应当实例化哪个子类。客户类往往有多个，如果不使用简单工厂，那么所有的客户类都要知道所有子类的细节。而且一旦子类发生改变，例如增加子类，那么所有的客户类都要进行修改。
 
-<div align="center"> <img src="../pics//c79da808-0f28-4a36-bc04-33ccc5b83c13.png"/> </div><br>
+<img src="./images/simple factory.png" style="zoom:100%" />
 
 ### Implementation
 
@@ -384,7 +388,7 @@ public class Client {
 
 下图中，Factory 有一个 doSomething() 方法，这个方法需要用到一个产品对象，这个产品对象由 factoryMethod() 方法创建。该方法是抽象的，需要由子类去实现。
 
-<div align="center"> <img src="../pics//1818e141-8700-4026-99f7-900a545875f5.png"/> </div><br>
+<img src="./images/factory method.png" style="zoom:100%" />
 
 ### Implementation
 
@@ -448,7 +452,9 @@ public class ConcreteFactory2 extends Factory {
 
 从高层次来看，抽象工厂使用了组合，即 Cilent 组合了 AbstractFactory，而工厂方法模式使用了继承。
 
-<div align="center"> <img src="../pics//8668a3e1-c9c7-4fcb-98b2-a96a5d841579.png"/> </div><br>
+<img src="./images/abstract factory.png" style="zoom:100%" />
+
+
 
 ### Implementation
 
@@ -538,7 +544,7 @@ public class Client {
 
 ### Class Diagram
 
-<div align="center"> <img src="../pics//13b0940e-d1d7-4b17-af4f-b70cb0a75e08.png"/> </div><br>
+<img src="./images/builder.png" style="zoom:100%" />
 
 ### Implementation
 
@@ -628,7 +634,7 @@ abcdefghijklmnopqrstuvwxyz
 
 ### Class Diagram
 
-<div align="center"> <img src="../pics//a40661e4-1a71-46d2-a158-ff36f7fc3331.png"/> </div><br>
+<img src="./images/prototype.png" style="zoom:100%" />
 
 ### Implementation
 
@@ -689,7 +695,7 @@ abc
 
 - Handler：定义处理请求的接口，并且实现后继链（successor）
 
-<div align="center"> <img src="../pics//691f11eb-31a7-46be-9de1-61f433c4b3c7.png"/> </div><br>
+<img src="./images/chain of responsibility.png" style="zoom:100%" />
 
 ### Implementation
 
@@ -827,13 +833,13 @@ request2 is handle by ConcreteHandler2
 - Invoker：通过它来调用命令
 - Client：可以设置命令与命令的接收者
 
-<div align="center"> <img src="../pics//ae1b27b8-bc13-42e7-ac12-a2242e125499.png"/> </div><br>
+<img src="./images/command.png" style="zoom:100%" />
 
 ### Implementation
 
 设计一个遥控器，可以控制电灯开关。
 
-<div align="center"> <img src="../pics//e6bded8e-41a0-489a-88a6-638e88ab7666.jpg"/> </div><br>
+<img src="./images/command example.jpg" style="zoom:100%" />
 
 ```java
 public interface Command {
@@ -948,7 +954,7 @@ public class Client {
 - TerminalExpression：终结符表达式，每个终结符都需要一个 TerminalExpression。
 - Context：上下文，包含解释器之外的一些全局信息。
 
-<div align="center"> <img src="../pics//794239e3-4baf-4aad-92df-f02f59b2a6fe.png"/> </div><br>
+<img src="./images/interpreter.png" style="zoom:100%" />
 
 ### Implementation
 
@@ -1073,7 +1079,7 @@ false
 - Iterator 主要定义了 hasNext() 和 next() 方法。
 - Client 组合了 Aggregate，为了迭代遍历 Aggregate，也需要组合 Iterator。
 
-<div align="center"> <img src="../pics//b0f61ac2-a4b6-4042-9cf0-ccf4238c1ff7.png"/> </div><br>
+<img src="./images/iterator.png" style="zoom:100%" />
 
 ### Implementation
 
@@ -1162,17 +1168,17 @@ public class Client {
 - Mediator：中介者，定义一个接口用于与各同事（Colleague）对象通信。
 - Colleague：同事，相关对象
 
-<div align="center"> <img src="../pics//d0afdd23-c9a5-4d1c-9b3d-404bff3bd0d1.png"/> </div><br>
+<img src="./images/mediator.png" style="zoom:100%" />
 
 ### Implementation
 
 Alarm（闹钟）、CoffeePot（咖啡壶）、Calendar（日历）、Sprinkler（喷头）是一组相关的对象，在某个对象的事件产生时需要去操作其它对象，形成了下面这种依赖结构：
 
-<div align="center"> <img src="../pics//82cfda3b-b53b-4c89-9fdb-26dd2db0cd02.jpg"/> </div><br>
+<img src="./images/mediator example1.jpg" style="zoom:100%" />
 
 使用中介者模式可以将复杂的依赖结构变成星形结构：
 
-<div align="center"> <img src="../pics//5359cbf5-5a79-4874-9b17-f23c53c2cb80.jpg"/> </div><br>
+<img src="./images/mediator example2.jpg" style="zoom:100%" />
 
 ```java
 public abstract class Colleague {
@@ -1332,7 +1338,7 @@ doSprinkler()
 - Caretaker：负责保存好备忘录
 - Menento：备忘录，存储原始对象的的状态。备忘录实际上有两个接口，一个是提供给 Caretaker 的窄接口：它只能将备忘录传递给其它对象；一个是提供给 Originator 的宽接口，允许它访问到先前状态所需的所有数据。理想情况是只允许 Originator 访问本备忘录的内部状态。
 
-<div align="center"> <img src="../pics//867e93eb-3161-4f39-b2d2-c0cd3788e194.png"/> </div><br>
+<img src="./images/memento.png" style="zoom:100%" />
 
 ### Implementation
 
@@ -1505,7 +1511,7 @@ public class Client {
 
 主题（Subject）是被观察的对象，而其所有依赖者（Observer）称为观察者。
 
-<div align="center"> <img src="../pics//7a3c6a30-c735-4edb-8115-337288a4f0f2.jpg" width="600"/> </div><br>
+<img src="./images/observer.png" style="zoom:100%" />
 
 ### Class Diagram
 
@@ -1513,13 +1519,13 @@ public class Client {
 
 观察者（Observer）的注册功能需要调用主题的 registerObserver() 方法。
 
-<div align="center"> <img src="../pics//0df5d84c-e7ca-4e3a-a688-bb8e68894467.png"/> </div><br>
+<img src="./images/observer example.jpg" style="zoom:100%" />
 
 ### Implementation
 
 天气数据布告板会在天气信息发生改变时更新其内容，布告板有多个，并且在将来会继续增加。
 
-<div align="center"> <img src="../pics//b1df9732-86ce-4d69-9f06-fba1db7b3b5a.jpg"/> </div><br>
+<img src="./images/observer example2.jpg" style="zoom:100%" />
 
 ```java
 public interface Subject {
@@ -1640,13 +1646,13 @@ StatisticsDisplay.update: 1.0 1.0 1.0
 
 ### Class Diagram
 
-<div align="center"> <img src="../pics//c5085437-54df-4304-b62d-44b961711ba7.png"/> </div><br>
+<img src="./images/state.png" style="zoom:100%" />
 
 ### Implementation
 
 糖果销售机有多种状态，每种状态下销售机有不同的行为，状态可以发生转移，使得销售机的行为也发生改变。
 
-<div align="center"> <img src="../pics//396be981-3f2c-4fd9-8101-dbf9c841504b.jpg" width="600"/> </div><br>
+<img src="./images/state example.jpg" style="zoom:100%" />
 
 ```java
 public interface State {
@@ -1947,7 +1953,7 @@ No gumball dispensed
 - Strategy 接口定义了一个算法族，它们都实现了  behavior() 方法。
 - Context 是使用到该算法族的类，其中的 doSomething() 方法会调用 behavior()，setStrategy(Strategy) 方法可以动态地改变 strategy 对象，也就是说能动态地改变 Context 所使用的算法。
 
-<div align="center"> <img src="../pics//1fc969e4-0e7c-441b-b53c-01950d2f2be5.png"/> </div><br>
+<img src="./images/strategy.png" style="zoom:100%" />
 
 ### 与状态模式的比较
 
@@ -2034,13 +2040,13 @@ quack!
 
 ### Class Diagram
 
-<div align="center"> <img src="../pics//c3c1c0e8-3a78-4426-961f-b46dd0879dd8.png"/> </div><br>
+<img src="./images/template method.png" style="zoom:100%" />
 
 ### Implementation
 
 冲咖啡和冲茶都有类似的流程，但是某些步骤会有点不一样，要求复用那些相同步骤的代码。
 
-<div align="center"> <img src="../pics//11236498-1417-46ce-a1b0-e10054256955.png"/> </div><br>
+<img src="./images/template method example.png" style="zoom:100%" />
 
 ```java
 public abstract class CaffeineBeverage {
@@ -2144,7 +2150,7 @@ Tea.addCondiments
 - ObjectStructure：对象结构，可以是组合结构，或者是一个集合。能够枚举元素，可以提供一个高层接口以允许访问者访问它的元素。
 - Element：定义一个Accept操作，它以一个访问者为参数 （数据结构，比如人 -男 女，稳定的数据结构）
 
-<div align="center"> <img src="../pics//ec923dc7-864c-47b0-a411-1f2c48d084de.png"/> </div><br>
+<img src="./images/visitor1.png" style="zoom:100%" />
 
 ### Implementation
 
@@ -2349,7 +2355,7 @@ Number of items:     6
 
 ### Class Diagram
 
-<div align="center"> <img src="../pics//dd3b289c-d90e-44a6-a44c-4880517eb1de.png"/> </div><br>
+<img src="./images/null.png" style="zoom:100%" />
 
 ### Implementation
 
@@ -2405,11 +2411,11 @@ public class Client {
 
 把一个类接口转换成另一个用户需要的接口。
 
-<div align="center"> <img src="../pics//3d5b828e-5c4d-48d8-a440-281e4a8e1c92.png"/> </div><br>
+<img src="./images/adapter example.png" style="zoom:100%" />
 
 ### Class Diagram
 
-<div align="center"> <img src="../pics//0889c0b4-07b4-45fc-873c-e0e16b97f67d.png"/> </div><br>
+<img src="./images/adapter.png" style="zoom:100%" />
 
 ### Implementation
 
@@ -2481,7 +2487,7 @@ public class Client {
 - Abstraction：定义抽象类的接口
 - Implementor：定义实现类接口
 
-<div align="center"> <img src="../pics//c2cbf5d2-82af-4c78-bd43-495da5adf55f.png"/> </div><br>
+<img src="./images/bridge.png" style="zoom:100%" />
 
 ### Implementation
 
@@ -2637,9 +2643,7 @@ public class Client {
 
 组合对象拥有一个或者多个组件对象，因此组合对象的操作可以委托给组件对象去处理，而组件对象可以是另一个组合对象或者叶子对象。
 
-
-
-<div align="center"> <img src="../pics//77931a4b-72ba-4016-827d-84b9a6845a51.png"/> </div><br>
+<img src="./images/composite.png" style="zoom:100%" />
 
 ### Implementation
 
@@ -2775,7 +2779,7 @@ Composite:root
 
 装饰者（Decorator）和具体组件（ConcreteComponent）都继承自组件（Component），具体组件的方法实现不需要依赖于其它对象，而装饰者组合了一个组件，这样它可以装饰其它装饰者或者具体组件。所谓装饰，就是把这个装饰者套在被装饰者之上，从而动态扩展被装饰者的功能。装饰者的方法有一部分是自己的，这属于它的功能，然后调用被装饰者的方法实现，从而也保留了被装饰者的功能。可以看到，具体组件应当是装饰层次的最低层，因为只有具体组件的方法实现不需要依赖于其它对象。
 
-<div align="center"> <img src="../pics//137c593d-0a9e-47b8-a9e6-b71f540b82dd.png"/> </div><br>
+<img src="./images/decorator.png" style="zoom:100%" />
 
 ### Implementation
 
@@ -2783,7 +2787,7 @@ Composite:root
 
 下图表示在 DarkRoast 饮料上新增新添加 Mocha 配料，之后又添加了 Whip 配料。DarkRoast 被 Mocha 包裹，Mocha 又被 Whip 包裹。它们都继承自相同父类，都有 cost() 方法，外层类的 cost() 方法调用了内层类的 cost() 方法。
 
-<div align="center"> <img src="../pics//c9cfd600-bc91-4f3a-9f99-b42f88a5bb24.jpg" width="600"/> </div><br>
+<img src="./images/decorator example.jpg" style="zoom:100%" />
 
 ```java
 public interface Beverage {
@@ -2881,7 +2885,7 @@ public class Client {
 
 ### Class Diagram
 
-<div align="center"> <img src="../pics//f9978fa6-9f49-4a0f-8540-02d269ac448f.png"/> </div><br>
+<img src="./images/facade.png" style="zoom:100%" />
 
 ### Implementation
 
@@ -2940,7 +2944,7 @@ public class Client {
 - IntrinsicState：内部状态，享元对象共享内部状态
 - ExtrinsicState：外部状态，每个享元对象的外部状态不同
 
-<div align="center"> <img src="../pics//d52270b4-9097-4667-9f18-f405fc661c99.png"/> </div><br>
+<img src="./images/flyweight.png" style="zoom:100%" />
 
 ### Implementation
 
@@ -3029,7 +3033,7 @@ Java 利用缓存来加速大量小对象的访问时间。
 - 保护代理（Protection Proxy）：按权限控制对象的访问，它负责检查调用者是否具有实现一个请求所必须的访问权限。
 - 智能代理（Smart Reference）：取代了简单的指针，它在访问对象时执行一些附加操作：记录对象的引用次数；当第一次引用一个对象时，将它装入内存；在访问一个实际对象前，检查是否已经锁定了它，以确保其它对象不能改变它。
 
-<div align="center"> <img src="../pics//a6c20f60-5eba-427d-9413-352ada4b40fe.png"/> </div><br>
+<img src="./images/proxy.png" style="zoom:100%" />
 
 ### Implementation
 
